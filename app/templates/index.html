@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<section id="login-index">
+    <h1>Index</h1>
+    {% if current_user.email %}
+        <p>Hello, {{ current_user.email }}</p>
+        <button @click="logout">Logout</button>
+    {% else %}
+    <a href="/login">Login</a>
+    <a href="/register">Register</a>
+    {% endif %}
+</section>
+
+
+<script>
+    new Vue({ 
+      el: '#login-index',
+      delimiters: ['[[', ']]'],
+      data() {
+        return {}
+      }, 
+      methods: {
+        async logout() {
+            console.log('inside logout')
+            const response = await axios.post('/logout')
+
+            if (response.data['formErrorMessage']){
+                this.formErrorMessage = response.data['formErrorMessage']
+                return;
+            }
+            location.href = `${response.data['redirect_url']}`
+        },
+
+      }
+  })
+</script>
+
+
+{% endblock %}
