@@ -8,7 +8,6 @@ if [ -f "app.db" ]; then
     rm app.db
 fi
 
-
 flask db init
 flask db migrate -m "Initial migration"
 flask db upgrade

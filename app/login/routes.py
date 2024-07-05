@@ -22,7 +22,6 @@ def send_email(recipient_email, email_subject, email_text):
         raise Exception(response.text)
 
 
-
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
